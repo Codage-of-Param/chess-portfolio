@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+:root {
+  --bg-main: #f6f8f5;
+  --bg-card: #ffffff;
+  --bg-card-sub: #f6f8f5;
+  --bg-card-hover: #ebf1e6;
+  --text-primary: #272522;
+  --text-secondary: #5c6256;
+  --text-muted: #81877b;
+  --border-color: #dce3d6;
+  --border-subtle: #ebf0e6;
+  --accent-green: #7fa650;
+  --accent-green-hover: #6e9443;
+  --accent-green-bg: #eef5e6;
+  --nav-bg: rgba(246, 248, 245, 0.85);
+}
+
+.dark {
+  --bg-main: #131411;
+  --bg-card: #1d201a;
+  --bg-card-sub: #242721;
+  --bg-card-hover: #2c3127;
+  --text-primary: #f5f6f4;
+  --text-secondary: #b6bcae;
+  --text-muted: #828a7c;
+  --border-color: #33392d;
+  --border-subtle: #272c22;
+  --accent-green: #81b64c;
+  --accent-green-hover: #93cb58;
+  --accent-green-bg: #263419;
+  --nav-bg: rgba(19, 20, 17, 0.88);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    min-width: 320px;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    touch-action: manipulation;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   CUSTOM SCROLLBAR  
+   ═══════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+/* ═══════════════════════════════════════════════════
+   KEYFRAME ANIMATIONS  
+   ═══════════════════════════════════════════════════ */
+
+@keyframes floatPiece {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-18px) rotate(-1deg); }
+  75% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.12); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shineSweep {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+@keyframes cursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes pieceDrop {
+  0% { transform: translateY(-20px) scale(0.8); opacity: 0; }
+  60% { transform: translateY(3px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.animate-float {
+  animation: floatPiece 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-piece-drop {
+  animation: pieceDrop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ═══════════════════════════════════════════════════
+   INTERACTIVE MICRO-ANIMATIONS  
+   ═══════════════════════════════════════════════════ */
+
+.hover-shine {
+  position: relative;
+  overflow: hidden;
+}
+.hover-shine::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+}
+.hover-shine:hover::after {
+  animation: shineSweep 0.75s ease-out;
+}
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15),
+              0 0 16px -4px rgba(127, 166, 80, 0.2);
+}
+
+.press-scale {
+  transition: transform 0.15s ease;
+}
+.press-scale:active {
+  transform: scale(0.95);
+}
+
+.hover-glow-border {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.hover-glow-border:hover {
+  border-color: rgba(129, 182, 76, 0.6);
+  box-shadow: 0 0 0 3px rgba(129, 182, 76, 0.15),
+              0 0 20px rgba(129, 182, 76, 0.1);
+}
+
+.typewriter-cursor::after {
+  content: '|';
+  display: inline-block;
+  animation: cursorBlink 1s step-end infinite;
+  color: var(--accent-green);
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* ═══════════════════════════════════════════════════
+   THEMED KNIGHT SHOWCASE ANIMATIONS  
+   ═══════════════════════════════════════════════════ */
+
+@keyframes knightHover {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-9px) rotate(-0.7deg);
+  }
+  50% {
+    transform: translateY(-17px) rotate(0.4deg);
+  }
+  75% {
+    transform: translateY(-7px) rotate(1deg);
+  }
+}
+
+@keyframes shadowPulse {
+  0%, 100% {
+    transform: scale(1) translateY(0px);
+    opacity: 0.65;
+    filter: blur(8px);
+  }
+  50% {
+    transform: scale(0.76) translateY(3px);
+    opacity: 0.32;
+    filter: blur(15px);
+  }
+}
+
+@keyframes pedestalGlow {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes gleamSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-150%) translateY(-50%) rotate(30deg);
+  }
+  15% {
+    opacity: 0.85;
+  }
+  35% {
+    opacity: 0;
+    transform: translateX(180%) translateY(50%) rotate(30deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(180%) translateY(50%) rotate(30deg);
+  }
+}
+
+.animate-knight-hover {
+  animation: knightHover 5s ease-in-out infinite;
+}
+
+.animate-shadow-pulse {
+  animation: shadowPulse 5s ease-in-out infinite;
+}
+
+.animate-pedestal-glow {
+  animation: pedestalGlow 4s ease-in-out infinite;
+}
+
+.animate-gleam-sweep {
+  animation: gleamSweep 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+
