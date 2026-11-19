@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PlayerStats, ChessPlayer } from '../types/chess';
-import { Trophy, Zap, Clock, Target, Flame, Activity, Sparkles } from 'lucide-react';
+import { Trophy, Zap, Clock, Target, Flame, Activity, Sparkles, Bot } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
 import AnimatedCounter from './AnimatedCounter';
 import ChessStyleRadar from './ChessStyleRadar';
@@ -189,6 +189,12 @@ export const CareerStats: React.FC<CareerStatsProps> = ({ stats, player }) => {
                 <Trophy className="w-4 h-4 text-purple-400" />
                 <span className="text-zinc-400">League:</span>
                 <span className="text-purple-400 font-extrabold">Legend</span>
+              </div>
+
+              <div className="hidden lg:flex items-center gap-1.5">
+                <Bot className="w-4 h-4 text-[#81b64c]" />
+                <span className="text-zinc-400">Bots Conquered:</span>
+                <span className="text-[#81b64c] font-extrabold">13 (1,600 Elo Peak)</span>
               </div>
             </div>
           </div>

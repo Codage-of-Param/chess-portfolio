@@ -20,6 +20,7 @@ import {
   ExternalLink,
   X,
   Medal,
+  Bot,
 } from 'lucide-react';
 
 interface AwardsWallProps {
@@ -27,13 +28,13 @@ interface AwardsWallProps {
   stats: PlayerStats;
 }
 
-export type AwardCategory = 'all' | 'medals' | 'combat' | 'tactics' | 'milestones';
+export type AwardCategory = 'all' | 'medals' | 'bots' | 'combat' | 'tactics' | 'milestones';
 export type AwardTier = 'diamond' | 'gold' | 'emerald' | 'silver';
 
 export interface AwardItem {
   id: string;
   title: string;
-  category: 'medals' | 'combat' | 'tactics' | 'milestones';
+  category: 'medals' | 'bots' | 'combat' | 'tactics' | 'milestones';
   tier: AwardTier;
   icon: React.ReactNode;
   metric: string;
@@ -45,6 +46,150 @@ export interface AwardItem {
   evidence: string;
   externalLink?: string;
 }
+
+export interface DefeatedBot {
+  name: string;
+  rating: number;
+  category: 'Beginner' | 'Intermediate' | 'Advanced';
+  tagline: string;
+  victoryNote: string;
+  avatarUrl: string;
+  crowns: number;
+  link: string;
+}
+
+export const DEFEATED_BOTS: DefeatedBot[] = [
+  {
+    name: 'Martin',
+    rating: 250,
+    category: 'Beginner',
+    tagline: 'The Friendly Coach',
+    victoryNote: 'Punished opening blunders with clean 3-crown tactical conversion.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103233634.340f6e91.160x160o.289139268875.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=martin',
+  },
+  {
+    name: 'Wayne',
+    rating: 250,
+    category: 'Beginner',
+    tagline: 'Quiet Pawn Pusher',
+    victoryNote: 'Central pawn rupture leading into swift back-rank checkmate.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103233826.11f2666a.160x160o.3a1a9e52e698.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=wayne',
+  },
+  {
+    name: 'Elani',
+    rating: 400,
+    category: 'Beginner',
+    tagline: 'Cautious Defender',
+    victoryNote: 'Trapped the bishop pair and converted clean piece majority.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103234288.4e0eb38c.160x160o.cf650a320624.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=elani',
+  },
+  {
+    name: 'Elena',
+    rating: 550,
+    category: 'Beginner',
+    tagline: 'Tactical Explorer',
+    victoryNote: 'Discovered deflection pin on the queen to win heavy artillery.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103234472.d9f89ef1.160x160o.748e028b17b6.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=elena',
+  },
+  {
+    name: 'Jimmy',
+    rating: 600,
+    category: 'Beginner',
+    tagline: 'Dynamic Attacker',
+    victoryNote: 'Kingside knight outpost battery neutralizing counterplay.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103234674.321b67f1.160x160o.13a02798f065.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=jimmy',
+  },
+  {
+    name: 'Aron',
+    rating: 700,
+    category: 'Beginner',
+    tagline: 'Piece Hunter',
+    victoryNote: 'Tactical fork winning the exchange into a winning rook endgame.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103234902.9c072223.160x160o.e48cfa5dfeb5.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=aron',
+  },
+  {
+    name: 'Milana',
+    rating: 900,
+    category: 'Intermediate',
+    tagline: 'Sharp Opportunist',
+    victoryNote: 'Crushed early flank attack with solid central Italian Game defense.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103235128.f907e597.160x160o.5d9e5db4ee60.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=milana',
+  },
+  {
+    name: 'Jade',
+    rating: 1000,
+    category: 'Intermediate',
+    tagline: 'Tactical Pressure',
+    victoryNote: 'Queen sacrifice into forced mating sequence in 24 moves.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103235314.d175b9f9.160x160o.9bf7e3fba617.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=jade',
+  },
+  {
+    name: 'Sven',
+    rating: 1100,
+    category: 'Intermediate',
+    tagline: 'Scandinavian Grinder',
+    victoryNote: 'Dismantled solid pawn wall with kingside battery and rook lift.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103235548.aa9ca09c.160x160o.3d8c1be486a9.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=sven',
+  },
+  {
+    name: 'Nelson',
+    rating: 1300,
+    category: 'Intermediate',
+    tagline: 'Early Queen Aggressor',
+    victoryNote: 'Neutralized the notorious 1. e4 e5 2. Qh5 Wayward Queen attack, winning the Queen and earning 3 crowns.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103235770.cb35be4f.160x160o.4db8c8cb6fe5.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=nelson',
+  },
+  {
+    name: 'Laura',
+    rating: 1400,
+    category: 'Intermediate',
+    tagline: 'Positional Strategist',
+    victoryNote: 'Deep calculation through complex knight outposts to secure a decisive victory.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103236020.91ef084c.160x160o.62886a07cfd1.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=laura',
+  },
+  {
+    name: 'Antonio',
+    rating: 1500,
+    category: 'Advanced',
+    tagline: 'All-Around Master AI',
+    victoryNote: 'Master-level tactical conversion overcoming 1500 engine precision without hints.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103236248.fb6a7590.160x160o.a742886c8f61.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=antonio',
+  },
+  {
+    name: 'Isabel',
+    rating: 1600,
+    category: 'Advanced',
+    tagline: 'Endgame Virtuoso',
+    victoryNote: 'Tenacious king defense converting double-rook endgame into winning pawn promotion.',
+    avatarUrl: 'https://images.chesscomfiles.com/uploads/v1/user/103236466.7fa7788a.160x160o.2c1613bc9cb6.png',
+    crowns: 3,
+    link: 'https://www.chess.com/play/computer?bot=isabel',
+  },
+];
 
 const AWARDS_DATA: AwardItem[] = [
   // ═══════════════════════════════════════════════════════════
@@ -154,6 +299,70 @@ const AWARDS_DATA: AwardItem[] = [
     criteria: 'Compete from opening round to elimination/podium in 30+ official tournaments.',
     evidence: '32 official finished tournament records verified via Chess.com API.',
     externalLink: 'https://www.chess.com/member/Pa_ra-m/tournaments',
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // PLAY BOTS CONQUESTS (Chess.com AI Opponents Defeated)
+  // ═══════════════════════════════════════════════════════════
+  {
+    id: 'nelson-1300-bot-slayer',
+    title: "Nelson's Nemesis (1,300 Elo Bot Conquered) 👑",
+    category: 'bots',
+    tier: 'gold',
+    icon: <Bot className="w-6 h-6 text-amber-400" />,
+    metric: '1,300 Bot Elo',
+    metricLabel: 'Nelson Defeated',
+    description: "Neutralized Chess.com's infamous 1300 early Queen-attacking bot Nelson, trapping the queen with zero hints to claim full 3 Gold Crowns.",
+    unlockedDate: 'Play Bots Arena',
+    rarity: 'Infamous Nemesis 👑',
+    criteria: 'Defeat Nelson (1,300 Elo) with no hints or takebacks in Chess.com Play Bots.',
+    evidence: 'Flawless 3-crown victory: Wayward Queen refutation into checkmate.',
+    externalLink: 'https://www.chess.com/play/computer?bot=nelson',
+  },
+  {
+    id: 'antonio-1500-bot-slayer',
+    title: 'Antonio 1,500 Elo Master Bot Tamed 🤖',
+    category: 'bots',
+    tier: 'diamond',
+    icon: <Crown className="w-6 h-6 text-purple-400" />,
+    metric: '1,500 Bot Elo',
+    metricLabel: 'Master AI Tamed',
+    description: 'Calculated through deep tactical deflection to conquer Antonio (1500 Elo) in an endgame pawn breakthrough, earning 3 Gold Crowns.',
+    unlockedDate: 'Play Bots Arena',
+    rarity: 'Master Bot Tier 🤖',
+    criteria: 'Defeat 1500+ rated master engine bots without hints.',
+    evidence: 'Official Chess.com Play vs Computer: 3 crowns unlocked against Antonio.',
+    externalLink: 'https://www.chess.com/play/computer?bot=antonio',
+  },
+  {
+    id: 'isabel-1600-bot-conquest',
+    title: 'Isabel 1,600 Elo Endgame AI Defeated 🎖️',
+    category: 'bots',
+    tier: 'diamond',
+    icon: <Trophy className="w-6 h-6 text-purple-400" />,
+    metric: '1,600 Bot Elo',
+    metricLabel: 'Peak Bot Defeated',
+    description: 'All-time highest Chess.com computer opponent conquered. Dismantled 1600-rated Isabel with aggressive tactical piece coordination.',
+    unlockedDate: 'Play Bots Arena',
+    rarity: 'Top AI Conquest 🏆',
+    criteria: 'Defeat Isabel (1,600 Elo) with 3 full crowns in Play vs Computer.',
+    evidence: 'Highest bot rating conquered: 1,600 Elo with 3 crowns.',
+    externalLink: 'https://www.chess.com/play/computer?bot=isabel',
+  },
+  {
+    id: 'play-bots-3-crowns-sweep',
+    title: '39 Gold Crowns: 13 Bots Defeated 👑',
+    category: 'bots',
+    tier: 'emerald',
+    icon: <Sparkles className="w-6 h-6 text-emerald-400" />,
+    metric: '39 Crowns',
+    metricLabel: '13 Bots Crowned',
+    description: 'Achieved maximum 3 Gold Crowns across 13 Chess.com computer opponents from Martin (250) up to Isabel (1600) with zero takebacks.',
+    unlockedDate: 'Career Collection',
+    rarity: '3-Crown Sweep 👑',
+    criteria: 'Defeat 10+ Chess.com bots with 3 full crowns (no hints, no takebacks).',
+    evidence: 'Collection of 13 defeated AI opponents across Beginner, Intermediate, and Advanced tiers.',
+    externalLink: 'https://www.chess.com/play/computer',
   },
 
   // ═══════════════════════════════════════════════════════════
@@ -307,6 +516,8 @@ const AWARDS_DATA: AwardItem[] = [
 export const AwardsWall: React.FC<AwardsWallProps> = ({ player, stats }) => {
   const [selectedCategory, setSelectedCategory] = useState<AwardCategory>('all');
   const [activeModalAward, setActiveModalAward] = useState<AwardItem | null>(null);
+  const [botTierFilter, setBotTierFilter] = useState<'all' | 'Beginner' | 'Intermediate' | 'Advanced'>('all');
+  const [activeBotModal, setActiveBotModal] = useState<DefeatedBot | null>(null);
 
   const filteredAwards = AWARDS_DATA.filter(
     (item) => selectedCategory === 'all' || item.category === selectedCategory,
@@ -320,6 +531,20 @@ export const AwardsWall: React.FC<AwardsWallProps> = ({ player, stats }) => {
         spread: 60,
         origin: { y: 0.6 },
         colors: ['#81b64c', '#ffd700', '#c084fc', '#ffffff', '#38bdf8'],
+      });
+    } catch {
+      // Ignore
+    }
+  };
+
+  const handleOpenBotModal = (bot: DefeatedBot) => {
+    setActiveBotModal(bot);
+    try {
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.6 },
+        colors: ['#81b64c', '#ffd700', '#00f0ff', '#ffffff'],
       });
     } catch {
       // Ignore
@@ -689,6 +914,197 @@ export const AwardsWall: React.FC<AwardsWallProps> = ({ player, stats }) => {
         </AnimatedSection>
 
         {/* ═════════════════════════════════════════════════════════════
+           DEDICATED PLAY BOTS CONQUERED & CROWNS SHOWCASE (Requested)
+           ═════════════════════════════════════════════════════════════ */}
+        <AnimatedSection animation="fadeUp" delay={235} className="mb-12">
+          <div
+            className="rounded-3xl border p-6 lg:p-8 relative overflow-hidden shadow-sm"
+            style={{
+              backgroundColor: 'var(--bg-card)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            {/* Ambient Background Gradient */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-[#81b64c]/10 via-amber-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+            {/* Header Badge & Title */}
+            <div className="flex items-center justify-between flex-wrap gap-4 mb-6 relative z-10">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#81b64c]/15 border border-[#81b64c]/30 flex items-center justify-center text-[#81b64c] shadow-xs">
+                  <Bot className="w-6 h-6 text-[#81b64c]" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#81b64c] block">
+                      Chess.com Play vs Computer
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#81b64c] animate-ping" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight" style={{ color: 'var(--text-primary)' }}>
+                    Play Bots Conquered & Defeated Ratings
+                  </h3>
+                </div>
+              </div>
+
+              {/* Summary Stats Badges */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="px-3 py-1.5 rounded-xl bg-purple-500/15 text-purple-300 text-xs font-black border border-purple-500/30 flex items-center gap-1.5">
+                  <Trophy className="w-3.5 h-3.5 text-purple-400" />
+                  <span>Peak Bot: 1,600 Elo (Isabel)</span>
+                </span>
+                <span className="px-3 py-1.5 rounded-xl bg-amber-500/15 text-amber-300 text-xs font-black border border-amber-500/30 flex items-center gap-1.5">
+                  <Crown className="w-3.5 h-3.5 text-amber-400" />
+                  <span>39 Gold Crowns 👑</span>
+                </span>
+                <span className="px-3 py-1.5 rounded-xl bg-[#81b64c]/15 text-[#81b64c] text-xs font-black border border-[#81b64c]/30">
+                  13 AI Bots Defeated
+                </span>
+              </div>
+            </div>
+
+            {/* Sub-Filter Tabs */}
+            <div className="flex items-center justify-between flex-wrap gap-3 pb-4 mb-6 border-b border-zinc-800/80 relative z-10">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-xs font-bold text-zinc-400 mr-1 hidden sm:inline">Filter Difficulty:</span>
+                {[
+                  { id: 'all', label: 'All Conquered Bots (13)' },
+                  { id: 'Beginner', label: 'Beginner (250–700)' },
+                  { id: 'Intermediate', label: 'Intermediate (900–1400)' },
+                  { id: 'Advanced', label: 'Advanced (1500–1600)' },
+                ].map((tier) => {
+                  const isActive = botTierFilter === tier.id;
+                  return (
+                    <button
+                      key={tier.id}
+                      onClick={() => setBotTierFilter(tier.id as any)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all cursor-pointer border ${
+                        isActive
+                          ? 'bg-[#81b64c] text-white border-[#81b64c] shadow-xs'
+                          : 'border-zinc-800/80 text-zinc-400 hover:text-white hover:bg-zinc-800/40'
+                      }`}
+                    >
+                      {tier.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="text-xs font-bold text-zinc-400 flex items-center gap-1.5">
+                <span className="text-amber-400">👑 3 Crowns</span> = Won with 0 Hints & 0 Takebacks
+              </div>
+            </div>
+
+            {/* Grid of Defeated Bots */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 relative z-10">
+              {DEFEATED_BOTS.filter(b => botTierFilter === 'all' || b.category === botTierFilter).map((bot) => {
+                const isAdvanced = bot.rating >= 1500;
+                const isIntermediate = bot.rating >= 900 && bot.rating < 1500;
+                const ratingBadgeColor = isAdvanced
+                  ? 'bg-purple-500/20 text-purple-300 border-purple-500/40'
+                  : isIntermediate
+                  ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                  : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+
+                return (
+                  <div
+                    key={bot.name}
+                    onClick={() => handleOpenBotModal(bot)}
+                    className="p-4 rounded-2xl border transition-all hover-lift cursor-pointer flex flex-col justify-between group hover-glow-border"
+                    style={{
+                      backgroundColor: 'var(--bg-card-sub)',
+                      borderColor: 'var(--border-color)',
+                    }}
+                  >
+                    <div>
+                      {/* Top Row: Avatar + Rating */}
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-2.5">
+                          <div className="relative w-11 h-11 rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900 flex items-center justify-center shrink-0">
+                            <img
+                              src={bot.avatarUrl}
+                              alt={bot.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                (e.currentTarget as HTMLElement).style.display = 'none';
+                              }}
+                            />
+                            <Bot className="w-5 h-5 text-zinc-400 absolute" style={{ zIndex: 0 }} />
+                          </div>
+                          <div>
+                            <span className="text-sm font-black block group-hover:text-[#81b64c] transition-colors" style={{ color: 'var(--text-primary)' }}>
+                              {bot.name}
+                            </span>
+                            <span className="text-[10px] text-zinc-400 font-semibold block">
+                              {bot.tagline}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Rating Pill */}
+                        <div className={`px-2.5 py-1 rounded-xl border text-xs font-mono font-black ${ratingBadgeColor}`}>
+                          {bot.rating} Elo
+                        </div>
+                      </div>
+
+                      {/* 3 Crowns Badge */}
+                      <div className="flex items-center justify-between px-2.5 py-1 rounded-lg bg-black/25 border border-zinc-800/80 mb-2.5">
+                        <span className="text-[10px] font-black uppercase text-amber-400 tracking-wider flex items-center gap-1">
+                          <span>👑👑👑</span>
+                          <span>3 Crowns</span>
+                        </span>
+                        <span className="text-[10px] font-bold text-emerald-400">
+                          DEFEATED ✓
+                        </span>
+                      </div>
+
+                      {/* Victory Note */}
+                      <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+                        {bot.victoryNote}
+                      </p>
+                    </div>
+
+                    {/* Bottom Action Footer */}
+                    <div className="mt-4 pt-3 border-t border-zinc-800/80 flex items-center justify-between text-xs">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                        {bot.category} Bot
+                      </span>
+                      <a
+                        href={bot.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-[11px] font-bold text-[#81b64c] hover:underline inline-flex items-center gap-1"
+                      >
+                        <span>Play Bot</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Quick Prompt Footnote */}
+            <div className="mt-6 pt-4 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-400">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#81b64c]" />
+                <span>Verified with Chess.com Play Bots crown achievements (zero assistance, 3-crown completions).</span>
+              </div>
+              <a
+                href="https://www.chess.com/play/computer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#81b64c] font-black hover:underline inline-flex items-center gap-1"
+              >
+                <span>Explore All Chess.com Bots</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+
+          </div>
+        </AnimatedSection>
+
+        {/* ═════════════════════════════════════════════════════════════
            INTERACTIVE FILTER BUTTONS
            ═════════════════════════════════════════════════════════════ */}
         <AnimatedSection animation="fadeUp" delay={250} className="mb-8">
@@ -696,6 +1112,7 @@ export const AwardsWall: React.FC<AwardsWallProps> = ({ player, stats }) => {
             {[
               { id: 'all', label: 'All Honours', count: AWARDS_DATA.length },
               { id: 'medals', label: 'Account Medals 🥈', count: AWARDS_DATA.filter((a) => a.category === 'medals').length },
+              { id: 'bots', label: 'Play Bots Defeated 🤖', count: AWARDS_DATA.filter((a) => a.category === 'bots').length },
               { id: 'combat', label: 'Combat & Streaks 🔥', count: AWARDS_DATA.filter((a) => a.category === 'combat').length },
               { id: 'tactics', label: 'Tactics & Puzzles ⚡', count: AWARDS_DATA.filter((a) => a.category === 'tactics').length },
               { id: 'milestones', label: 'Milestones & Elo 🏆', count: AWARDS_DATA.filter((a) => a.category === 'milestones').length },
@@ -933,10 +1350,142 @@ export const AwardsWall: React.FC<AwardsWallProps> = ({ player, stats }) => {
                     ? 'View Tactics Performance'
                     : activeModalAward.id.includes('peak-elo') || activeModalAward.id.includes('daily-peak')
                     ? 'Inspect Masterpiece Game'
+                    : activeModalAward.category === 'bots'
+                    ? 'Play Bot on Chess.com'
                     : activeModalAward.category === 'combat'
                     ? 'View Rated Game Archive'
                     : 'View Verified Telemetry'}
                 </span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════
+         BOT CONQUEST DETAIL MODAL
+         ═════════════════════════════════════════════════════════════ */}
+      {activeBotModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setActiveBotModal(null)}
+        >
+          <div
+            className="w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl border p-6 sm:p-8 shadow-2xl relative animate-in zoom-in-95 duration-200"
+            style={{
+              backgroundColor: 'var(--bg-card)',
+              borderColor: 'var(--border-color)',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setActiveBotModal(null)}
+              className="absolute top-5 right-5 p-2 rounded-full border hover:bg-zinc-800 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              style={{ borderColor: 'var(--border-color)' }}
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {/* Modal Bot Avatar & Header */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative w-16 h-16 rounded-2xl overflow-hidden border border-zinc-700 bg-zinc-900 flex items-center justify-center shrink-0">
+                <img
+                  src={activeBotModal.avatarUrl}
+                  alt={activeBotModal.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLElement).style.display = 'none';
+                  }}
+                />
+                <Bot className="w-8 h-8 text-zinc-400 absolute" style={{ zIndex: 0 }} />
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#81b64c] block">
+                    {activeBotModal.category} Bot
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[10px] font-black border border-amber-500/30">
+                    👑 3 CROWNS
+                  </span>
+                </div>
+                <h3
+                  className="text-2xl font-black tracking-tight"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {activeBotModal.name} ({activeBotModal.rating} Elo)
+                </h3>
+                <span className="text-xs text-zinc-400">
+                  {activeBotModal.tagline} • Conquered by Param Chotaliya (@Pa_ra-m)
+                </span>
+              </div>
+            </div>
+
+            {/* Victory Description */}
+            <div
+              className="p-4 rounded-2xl border mb-6"
+              style={{
+                backgroundColor: 'var(--bg-card-sub)',
+                borderColor: 'var(--border-color)',
+              }}
+            >
+              <span className="text-[10px] font-black uppercase tracking-wider text-[#81b64c] block mb-1">
+                Tactical Victory Breakdown
+              </span>
+              <p className="text-sm text-zinc-200 leading-relaxed font-medium">
+                {activeBotModal.victoryNote}
+              </p>
+            </div>
+
+            {/* Achievement Telemetry Strip */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div
+                className="p-3.5 rounded-2xl border text-xs"
+                style={{
+                  backgroundColor: 'var(--bg-card-sub)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="font-bold text-zinc-400 block mb-1 uppercase tracking-wider text-[10px]">
+                  Bot Rating Tier
+                </span>
+                <span className="text-base font-black text-amber-400">
+                  {activeBotModal.rating} Elo
+                </span>
+              </div>
+
+              <div
+                className="p-3.5 rounded-2xl border text-xs"
+                style={{
+                  backgroundColor: 'var(--bg-card-sub)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="font-bold text-zinc-400 block mb-1 uppercase tracking-wider text-[10px]">
+                  Crown Achievement
+                </span>
+                <span className="text-base font-black text-emerald-400">
+                  3 / 3 Gold Crowns
+                </span>
+              </div>
+            </div>
+
+            {/* Footer Action */}
+            <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#81b64c]" />
+                <span className="text-xs font-bold text-zinc-300">Play vs Computer Victory</span>
+              </div>
+
+              <a
+                href={activeBotModal.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#81b64c] hover:bg-[#93cb58] text-white text-xs font-bold transition-colors shadow-xs"
+              >
+                <span>Play Against {activeBotModal.name} on Chess.com</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
